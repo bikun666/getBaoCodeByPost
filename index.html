@@ -145,9 +145,9 @@
   </div>
 
   <script>
-    const apiURL = 'https://script.google.com/macros/s/AKfycbwHXvt6DcOq424W1orWA2PG7lc-U_gPjHF4GLJuyt3n1YNVC1V5sP-ivIzQ17LKWKfiIw/exec'; // webhook6
+    const apiURL = 'https://script.google.com/macros/s/AKfycbzHJGhKfd5y6m1HF5rJUDXpu0STm7QEliDV7K2nuxJPW8XRSQYOobTR-o5BBm5cMUUgRg/exec'; // webhook6
     let lastHash = null, errors = 0, lastHue = null;
-    const interval = 1000;
+    const interval = 2000; // 减少到500ms，提高响应速度
 
     function getRandomLightColor() {
       let hue;
