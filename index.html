@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <title>宝可梦验证码列表</title>
+  <title>验证码列表</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet"
          href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;800&display=swap">
@@ -177,12 +177,13 @@
 
     function renderList(data) {
       const list = document.getElementById('list');
-      // 移除过滤条件，显示所有数据
-      if (!data.length) {
-        list.innerHTML = '<div class="item empty">没有数据…</div>';
+      // 只显示有验证码的数据
+      const filtered = data.filter(i => i.code && i.code !== '(未找到)' && i.code !== '-');
+      if (!filtered.length) {
+        list.innerHTML = '<div class="item empty">没有找到验证码数据…</div>';
         return;
       }
-      list.innerHTML = data.slice(0,10).map((i, idx) => {
+      list.innerHTML = filtered.slice(0,10).map((i, idx) => {
         let displayEmail = i.email || '未知';
         if (idx >= 3 && displayEmail !== '未知') {
           const [local, domain] = displayEmail.split('@');
