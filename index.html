@@ -185,18 +185,19 @@
       }
       list.innerHTML = filtered.slice(0,10).map((i, idx) => {
         let displayEmail = i.email || '未知';
-        if (idx >= 3 && displayEmail !== '未知') {
-          const [local, domain] = displayEmail.split('@');
-          const maskCount = 3;
-          const visible = local.length > maskCount ? local.slice(0, local.length - maskCount) : '';
-          displayEmail = `${visible}${'*'.repeat(maskCount)}@${domain}`;
-        }
+        // 移除邮箱加密，显示完整邮箱
+        // if (idx >= 3 && displayEmail !== '未知') {
+        //   const [local, domain] = displayEmail.split('@');
+        //   const maskCount = 3;
+        //   const visible = local.length > maskCount ? local.slice(0, local.length - maskCount) : '';
+        //   displayEmail = `${visible}${'*'.repeat(maskCount)}@${domain}`;
+        // }
         const padded = (i.code && i.code !== '-') ? i.code.toString().padStart(6,'0') : '(未找到)';
         return `
           <div class="item ${idx === 0 ? 'highlight' : ''}" ${idx === 0 ? `style="background:linear-gradient(to right,${getRandomLightColor()},#fffdf0)"` : ''}>
             <div class="line">
               <span class="recipient">${displayEmail}</span>
-              ${idx >= 3 ? '<span style="font-size:13px;color:#666;">💡 为保护隐私，邮箱已部分隐藏</span>' : ''}
+              <!-- 移除隐私提示 -->
               <div class="code-wrapper">
                 <span class="label">验证码：</span>
                 ${padded !== '(未找到)' 
