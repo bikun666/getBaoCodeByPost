@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <title>验证码列表</title>
+  <title>宝可梦验证码列表</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet"
          href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;800&display=swap">
@@ -145,7 +145,7 @@
   </div>
 
   <script>
-    const apiURL = 'https://script.google.com/macros/s/AKfycbzbxtuyhPnj_jC8eF-PShqILXyZbGQlgLpCe3WVlIQ_9jbgkXEXDvNaaybbEGGK9s7HXw/exec'; // webhook6
+    const apiURL = 'https://script.google.com/macros/s/AKfycbzotFdf3B8mezwzEFq5yu-IWkbo67N9WggSNS5YVK0ZGE3CK17fpVeDZg828edJRF_CTg/exec'; // webhook6
     let lastHash = null, errors = 0, lastHue = null;
     const interval = 2000;
 
@@ -177,12 +177,12 @@
 
     function renderList(data) {
       const list = document.getElementById('list');
-      const filtered = data.filter(i => (i.subject || '').includes('【GENDA ID】認証コード'));
-      if (!filtered.length) {
-        list.innerHTML = '<div class="item empty">没有符合条件的数据…</div>';
+      // 移除过滤条件，显示所有数据
+      if (!data.length) {
+        list.innerHTML = '<div class="item empty">没有数据…</div>';
         return;
       }
-      list.innerHTML = filtered.slice(0,10).map((i, idx) => {
+      list.innerHTML = data.slice(0,10).map((i, idx) => {
         let displayEmail = i.email || '未知';
         if (idx >= 3 && displayEmail !== '未知') {
           const [local, domain] = displayEmail.split('@');
